@@ -13,4 +13,4 @@ flask-cors
 flask-session
 python-dotenv
 rapidfuzz
-comtypes
+
