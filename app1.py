@@ -67,7 +67,7 @@ def add_security_headers(response):
     return response
 @app.route('/static/images/<iitlabs.jpeg>')
 def serve_image(filename="iit_labs.jpeg"):
-    return send_from_directory("static/images", iit labs.jpeg)
+    return send_from_directory("static/images", "iit_labs.jpeg")
 
 
 @app.route('/')
