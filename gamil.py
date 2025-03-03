@@ -11,22 +11,24 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
 import io
-import os
 from dotenv import load_dotenv
 from rapidfuzz import fuzz, process  
 from docx import Document
 from pypdf import PdfReader
 import pandas as pd
 # Load spaCy's transformer-based model for better NER accuracy
+import os
 import spacy
+from spacy.cli import download
 
+# Check if Spacy model exists, if not, install it
+model_name = "en_core_web_trf"
 try:
-    nlp = spacy.load("en_core_web_trf")
+    nlp = spacy.load(model_name)
 except OSError:
-    print("Downloading 'en_core_web_trf' model...")
-    from spacy.cli import download
-    download("en_core_web_trf")  # Download the model
-    nlp = spacy.load("en_core_web_trf")  # Load it again
+    print(f"Downloading Spacy model: {model_name} ...")
+    download(model_name)  # Install the model
+    nlp = spacy.load(model_name)  # Load it after installation
 
 
 # Path to Tesseract-OCR executable (adjust for your system)
