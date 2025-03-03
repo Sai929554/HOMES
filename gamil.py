@@ -15,8 +15,9 @@ import io
 import os
 from dotenv import load_dotenv
 from rapidfuzz import fuzz, process  
-import comtypes.client
-
+from docx import Document
+from pypdf import PdfReader
+import pandas as pd
 # Load spaCy's transformer-based model for better NER accuracy
 nlp = spacy.load("en_core_web_trf")
 
@@ -26,6 +27,34 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Users\andre\anaconda3\Lib\site-pack
 # Load environment variables
 env_path = r"C:\Users\Lucas\OneDrive\Desktop\New folder\credentials.env"
 load_dotenv(env_path)
+
+# ✅ Function to extract text from Word (.docx)
+def extract_text_from_docx(file_path):
+    doc = Document(file_path)
+    text = "\n".join([para.text for para in doc.paragraphs])
+    return text
+
+# ✅ Function to extract text from PDF
+def extract_text_from_pdf(file_path):
+    reader = PdfReader(file_path)
+    text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
+    return text
+
+# ✅ Function to extract data from Excel (.xlsx)
+def extract_data_from_excel(file_path):
+    df = pd.read_excel(file_path, engine="openpyxl")
+    return df  # Returns a DataFrame
+
+# ✅ Function to process resumes (modify as needed)
+def process_resumes_for_job(file_path):
+    if file_path.endswith(".docx"):
+        return extract_text_from_docx(file_path)
+    elif file_path.endswith(".pdf"):
+        return extract_text_from_pdf(file_path)
+    elif file_path.endswith(".xlsx"):
+        return extract_data_from_excel(file_path)
+    else:
+        return "Unsupported file format"
 
 # Sanitize filenames (remove problematic characters)
 def sanitize_filename(filename):
