@@ -113,7 +113,6 @@ def logout():
     session.pop('user', None)
     session.pop('logged_in', None)
     return redirect(url_for('login'))
-
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Get port from Render, or use 5000 as default
+    app.run(host="0.0.0.0", port=port, debug=False)
