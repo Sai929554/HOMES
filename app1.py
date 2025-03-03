@@ -56,7 +56,6 @@ def send_reset_email(user_email):
         return False
 
 # Route to serve images
-<<<<<<< HEAD
 @app.route('/static/images/<filename>')
 def serve_image(filename):
     return send_from_directory("static/images", filename)
