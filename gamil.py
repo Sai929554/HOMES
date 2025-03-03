@@ -6,7 +6,6 @@ from docx import Document
 from PyPDF2 import PdfReader
 import pytesseract
 from pdf2image import convert_from_path
-import spacy
 from word2number import w2n
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -19,7 +18,16 @@ from docx import Document
 from pypdf import PdfReader
 import pandas as pd
 # Load spaCy's transformer-based model for better NER accuracy
-nlp = spacy.load("en_core_web_trf")
+import spacy
+
+try:
+    nlp = spacy.load("en_core_web_trf")
+except OSError:
+    print("Downloading 'en_core_web_trf' model...")
+    from spacy.cli import download
+    download("en_core_web_trf")  # Download the model
+    nlp = spacy.load("en_core_web_trf")  # Load it again
+
 
 # Path to Tesseract-OCR executable (adjust for your system)
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\andre\anaconda3\Lib\site-packages\tesseract"
