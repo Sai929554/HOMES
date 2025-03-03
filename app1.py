@@ -18,10 +18,7 @@ except OSError:
     nlp = spacy.load("en_core_web_sm")
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-<<<<<<< HEAD
-=======
 
->>>>>>> b151e9e (Initial commit)
 app.secret_key = os.getenv('SECRET_KEY', 'your_default_secret_key')  # Use environment variable for security
 
 # Enable CORS to allow access from your company website
