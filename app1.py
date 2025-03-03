@@ -66,7 +66,7 @@ def add_security_headers(response):
     response.headers["Content-Security-Policy"] = "frame-ancestors 'self' https://www.iitlabs.us;"
     return response
 @app.route('/static/images/<iitlabs.jpeg>')
-def serve_image(iit labs.jpeg):
+def serve_image(filename="iit_labs.jpeg"):
     return send_from_directory("static/images", iit labs.jpeg)
 
 
