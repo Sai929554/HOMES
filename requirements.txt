@@ -13,4 +13,7 @@ flask-cors
 flask-session
 python-dotenv
 rapidfuzz
+pypdf
+pandas
+openpyxl
 
