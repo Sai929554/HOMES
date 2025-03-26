@@ -5,4 +5,4 @@ google-api-python-client
 pandas
 python-docx
 PyPDF2
-from tabulate import tabulate
+tabulate
