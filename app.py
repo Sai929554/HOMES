@@ -18,8 +18,6 @@ import shutil
 from waitress import serve
 from framework import app  # Direct import
 from framework import create_app
-
-app = create_app()
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'Resumes'
 app.config['SECRET_KEY'] = 'your-secret-key-here'  # Change to a secure random key
@@ -510,9 +508,8 @@ def process_job(job_id):
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+# At the bottom of app.py
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
-    waitress-serve --host=0.0.0.0 --port=$PORT framework.module:app
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Default to 5000 locally
+    app.run(host='0.0.0.0', port=port, debug=True)
+    web: waitress-serve --listen=0.0.0.0:$PORT app:app
