@@ -6,3 +6,4 @@ pandas
 python-docx
 PyPDF2
 tabulate
+waitress>=2.1.2
