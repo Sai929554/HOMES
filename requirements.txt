@@ -1,15 +1,8 @@
-
+Flask
 Flask-Login
 google-auth
 google-api-python-client
 pandas
 python-docx
 PyPDF2
-tabulate
-waitress>=2.1.2
 waitress
-framework-package
-waitress>=2.1.2
-flask
-your-actual-framework-package==1.2.3  # Use real package name
-other-dependencies
