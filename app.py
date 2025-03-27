@@ -511,7 +511,7 @@ def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=port)
+    port = int(os.environ.get('PORT', 5000))
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
     waitress-serve --host=0.0.0.0 --port=$PORT framework.module:app
