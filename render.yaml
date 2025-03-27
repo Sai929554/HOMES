@@ -3,4 +3,4 @@ services:
     name: your-service
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python serve.py  # or waitress-serve command
+    startCommand:web: waitress-serve --listen=0.0.0.0:$PORT app:app
