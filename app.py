@@ -15,6 +15,8 @@ import io
 from docx import Document
 from PyPDF2 import PdfReader
 import shutil
+from waitress import serve
+from your_application import app  # import your Flask app instance
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'Resumes'
@@ -507,7 +509,8 @@ def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    serve(app, host='0.0.0.0', port=5000)  # or use PORT from environment
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
     app.run(debug=True)
